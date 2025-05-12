@@ -1,3 +1,3 @@
-# Puzzle
+# Sliding Puzzle Game
 
-## Unit 1 project - puzzle
+## Unit 1 project - Sliding Puzzle Game
