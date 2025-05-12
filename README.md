@@ -1,2 +1,3 @@
-# puzzle
-unit 1 project - puzzle 
+# Puzzle
+
+## Unit 1 project - puzzle

@@ -1,0 +1,19 @@
+body {
+  background-color: #e8e8e8;
+  text-align: center;
+}
+
+#title {
+  height: 160px;
+  width: 100;
+}
+
+#puzzle{
+    height: 500px;
+    width: 500px;
+    background-color: gray;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    border: 10px solid black;
+}
