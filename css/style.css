@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+
 body {
   background-color: #e8e8e8;
   text-align: center;
+  font-family: "Racing Sans One", sans-serif;
 }
 
 #title {
@@ -8,12 +11,17 @@ body {
   width: 100;
 }
 
-#puzzle{
-    height: 500px;
-    width: 500px;
-    background-color: gray;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    border: 10px solid black;
+#puzzle {
+  height: 500px;
+  width: 500px;
+  background-color: gray;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  border: 10px solid black;
+}
+
+#info {
+  display: flex;
+  justify-content: space-around;
 }
