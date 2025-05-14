@@ -1,4 +1,5 @@
-
+const rows = 3;
+const columns = 3;
 
 const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
