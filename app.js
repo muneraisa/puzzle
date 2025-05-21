@@ -3,6 +3,7 @@ const columns = 3;
 
 let currentTile;
 let blankTile;
+let moves = 0;
 
 const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const shuffled = ["3", "6", "1", "9", "8", "2", "7", "5", "4"];
@@ -57,6 +58,10 @@ function dragEnd() {
   //swap tiles
   blankTile.src = holding;
   currentTile.src = dropOn;
+
+  //moves
+  moves = moves + 1;
+  document.getElementById("moves").innerText = moves;
 
   //the coordinates are 0-0, 1-1 with dashes ...
 }
