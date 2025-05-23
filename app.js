@@ -6,9 +6,17 @@ let blankTile;
 let moves = 0;
 
 const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-const shuffled = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
 
-window.onload = function () {
+function startGame() {
+  //clear last game :
+  moves = 0;
+  document.getElementById("puzzle").innerHTML = "";
+  document.getElementById("message").innerHTML = "";
+  document.getElementById("again").innerHTML = "";
+  document.getElementById("moves").innerText = moves;
+
+  const shuffled = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
+
   //once loaded, create the tiles
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -29,7 +37,9 @@ window.onload = function () {
       document.getElementById("puzzle").append(tile); // add to the puzzle div
     }
   }
-};
+}
+
+window.onload = startGame;
 
 function dragStart() {
   currentTile = this; //the tile i am picking
@@ -99,15 +109,27 @@ function checkWin() {
     message = document.createElement("h2");
     message.innerText = "YOU WIN 🎉!";
     document.getElementById("message").append(message);
+
+    //play again
+    let againBtn = document.createElement("button");
+    againBtn.onclick = startGame;
+    againBtn.innerText = "Play Again !";
+    document.getElementById("again").append(againBtn);
   }
 }
 
 //loss
 function Loss() {
   let message = "";
-   message = document.createElement("h2");
-    message.innerText = "TOO MANY MOVES, YOU LOSE ☹️!";
-    document.getElementById("message").append(message);
+  message = document.createElement("h2");
+  message.innerText = "TOO MANY MOVES, YOU LOSE ☹️!";
+  document.getElementById("message").append(message);
+
+  //play again
+  let againBtn = document.createElement("button");
+  againBtn.onclick = startGame;
+  againBtn.innerText = "Play Again !";
+  document.getElementById("again").append(againBtn);
 }
 
 //swap once dropped
@@ -123,16 +145,14 @@ function dragEnd() {
     //swap tiles
     blankTile.src = holding;
     currentTile.src = dropOn;
-
-    
   }
 
   //moves
   moves = moves + 1;
   document.getElementById("moves").innerText = moves;
 
-   if (moves > 20) {
-    Loss(); // You need to define this function
+  if (moves > 20) {
+    Loss();
     return;
   }
 
