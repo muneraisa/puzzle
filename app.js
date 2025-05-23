@@ -8,7 +8,6 @@ let moves = 0;
 const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 function startGame() {
- 
   moves = 0;
   document.getElementById("puzzle").innerHTML = "";
   document.getElementById("message").innerHTML = "";
@@ -19,20 +18,17 @@ function startGame() {
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
+      let tile = document.createElement("img");
+      tile.setAttribute("id", r.toString() + "," + c.toString());
+      tile.src = "./images/" + shuffled.shift() + ".jpg";
 
-      let tile = document.createElement("img"); 
-      tile.setAttribute("id", r.toString() + "," + c.toString()); 
-      tile.src = "./images/" + shuffled.shift() + ".jpg"; 
-
-      
-      tile.addEventListener("dragstart", dragStart); 
-      tile.addEventListener("dragover", dragOver); 
+      tile.addEventListener("dragstart", dragStart);
+      tile.addEventListener("dragover", dragOver);
       tile.addEventListener("dragenter", dragEnter);
-      tile.addEventListener("drop", dragDrop); 
-      tile.addEventListener("dragend", dragEnd); 
+      tile.addEventListener("drop", dragDrop);
+      tile.addEventListener("dragend", dragEnd);
 
-      
-      document.getElementById("puzzle").append(tile); 
+      document.getElementById("puzzle").append(tile);
     }
   }
 }
@@ -40,7 +36,7 @@ function startGame() {
 window.onload = startGame;
 
 function dragStart() {
-  currentTile = this; 
+  currentTile = this;
 }
 
 function dragOver(e) {
@@ -54,19 +50,17 @@ function dragEnter(e) {
 function dragLeave() {}
 
 function dragDrop() {
-  blankTile = this; 
+  blankTile = this;
 }
-
 
 function getCoords(tile) {
   let coordinate = tile.id.split(",").map((coord) => parseInt(coord));
   return coordinate;
 }
 
-
 function checkAdjacent() {
-  let h = false; 
-  let v = false; 
+  let h = false;
+  let v = false;
 
   let [r, c] = getCoords(currentTile);
   let [r2, c2] = getCoords(blankTile);
@@ -89,7 +83,7 @@ function checkWin() {
   tiles.forEach((tile) => {
     let src = tile.src;
     let parts = src.split("/");
-    let img = parts[parts.length - 1]; 
+    let img = parts[parts.length - 1];
     let tileNum = img.split(".")[0];
     order.push(tileNum);
   });
@@ -106,7 +100,6 @@ function checkWin() {
   }
 }
 
-
 function Loss() {
   let message = "";
   message = document.createElement("h2");
@@ -119,7 +112,6 @@ function Loss() {
   document.getElementById("again").append(againBtn);
 }
 
-
 function dragEnd() {
   if (!blankTile.src.includes("1.jpg")) {
     return;
@@ -131,12 +123,12 @@ function dragEnd() {
 
     blankTile.src = holding;
     currentTile.src = dropOn;
-   
+
     moves = moves + 1;
     document.getElementById("moves").innerText = moves;
   }
 
-  if (moves >= 20) {
+  if (moves > 20) {
     Loss();
     return;
   }
