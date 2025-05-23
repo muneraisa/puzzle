@@ -5,10 +5,11 @@ let currentTile;
 let blankTile;
 let moves = 0;
 
-const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-const shuffled = ["3", "6", "1", "9", "8", "2", "7", "5", "4"];
+//const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const shuffled = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
 
 window.onload = function () {
+  
   //once loaded, create the tiles
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -49,36 +50,51 @@ function dragDrop() {
   blankTile = this; //the tile i am droping on
 }
 
-
-//coordinates 
+//coordinates
 function getCoords(tile) {
   let coordinate = tile.id.split(",").map((coord) => parseInt(coord));
   return coordinate;
 }
 
+function checkAdjacent() {
+  let h = false; // horizontal move
+  let v = false; // veertical
 
-//swap conditions
+  let [r, c] = getCoords(currentTile);
+  let [r2, c2] = getCoords(blankTile);
+
+  console.log("before check:", h, v);
+
+  //horizontal left or right
+  if (r == r2 && (c + 1 == c2 || c - 1 == c2)) {
+    h = true;
+  }
+
+  //vertical up or down
+  if (c == c2 && (r + 1 == r2 || r - 1 == r2)) {
+    v = true;
+  }
+
+  console.log("after check:", h, v);
+  return h || v;
+}
+
+//swap once dropped
 function dragEnd() {
-  if (!blankTile == "1.jpg") {
+  if (!blankTile.src.includes("1.jpg")) {
     return;
   }
 
+  if (checkAdjacent(currentTile, blankTile)) {
+    let holding = currentTile.src;
+    let dropOn = blankTile.src;
 
-
-
-
-  
-  
-  let holding = currentTile.src;
-  let dropOn = blankTile.src;
-
-  //swap tiles
-  blankTile.src = holding;
-  currentTile.src = dropOn;
+    //swap tiles
+    blankTile.src = holding;
+    currentTile.src = dropOn;
+  }
 
   //moves
   moves = moves + 1;
   document.getElementById("moves").innerText = moves;
-
-  
 }
