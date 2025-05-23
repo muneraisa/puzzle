@@ -9,20 +9,19 @@ const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const shuffled = ["3", "6", "1", "9", "8", "2", "7", "5", "4"];
 
 window.onload = function () {
-  //once loaded, bring the tiles
+  //once loaded, create the tiles
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       //loop through the grid
 
       let tile = document.createElement("img"); //create the elemnts from here instead of having it static in the HTML
-      tile.id = r.toString() + "-" + c.toString(); //pointer to the place of the tile, its like a matrix :)
+      tile.setAttribute("id", r.toString() + "," + c.toString()); // assign coordinate ids
       tile.src = "./images/" + shuffled.shift() + ".jpg"; // the path
 
       //DRAG FUNCTIONALITY
       tile.addEventListener("dragstart", dragStart); //click an image to drag
       tile.addEventListener("dragover", dragOver); //moving image around while clicked
       tile.addEventListener("dragenter", dragEnter); //dragging image onto another one
-      // tile.addEventListener("dragleave", dragLeave); //dragged image leaving anohter image
       tile.addEventListener("drop", dragDrop); //drag an image over another image, drop the image
       tile.addEventListener("dragend", dragEnd); //after drag drop, swap the two tiles
 
@@ -50,8 +49,26 @@ function dragDrop() {
   blankTile = this; //the tile i am droping on
 }
 
+
+//coordinates 
+function getCoords(tile) {
+  let coordinate = tile.id.split(",").map((coord) => parseInt(coord));
+  return coordinate;
+}
+
+
 //swap conditions
 function dragEnd() {
+  if (!blankTile == "1.jpg") {
+    return;
+  }
+
+
+
+
+
+  
+  
   let holding = currentTile.src;
   let dropOn = blankTile.src;
 
@@ -63,5 +80,5 @@ function dragEnd() {
   moves = moves + 1;
   document.getElementById("moves").innerText = moves;
 
-  //the coordinates are 0-0, 1-1 with dashes ...
+  
 }
