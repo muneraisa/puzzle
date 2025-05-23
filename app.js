@@ -79,6 +79,7 @@ function checkAdjacent() {
   return h || v;
 }
 
+//win
 function checkWin() {
   let order = [];
   let message = "";
@@ -101,6 +102,14 @@ function checkWin() {
   }
 }
 
+//loss
+function Loss() {
+  let message = "";
+   message = document.createElement("h2");
+    message.innerText = "TOO MANY MOVES, YOU LOSE ☹️!";
+    document.getElementById("message").append(message);
+}
+
 //swap once dropped
 function dragEnd() {
   if (!blankTile.src.includes("1.jpg")) {
@@ -114,10 +123,18 @@ function dragEnd() {
     //swap tiles
     blankTile.src = holding;
     currentTile.src = dropOn;
-    checkWin();
+
+    
   }
 
   //moves
   moves = moves + 1;
   document.getElementById("moves").innerText = moves;
+
+   if (moves > 20) {
+    Loss(); // You need to define this function
+    return;
+  }
+
+  checkWin();
 }

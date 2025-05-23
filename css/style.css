@@ -18,7 +18,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  border: 15px solid black;
+  border: 15px solid #f5a7a6;
   border-radius: 20px;
 }
 
