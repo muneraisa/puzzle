@@ -5,11 +5,10 @@ let currentTile;
 let blankTile;
 let moves = 0;
 
-//const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const correctOrder = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const shuffled = ["4", "2", "8", "5", "1", "6", "7", "9", "3"];
 
 window.onload = function () {
-  
   //once loaded, create the tiles
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -56,6 +55,7 @@ function getCoords(tile) {
   return coordinate;
 }
 
+//swap conditions
 function checkAdjacent() {
   let h = false; // horizontal move
   let v = false; // veertical
@@ -79,6 +79,28 @@ function checkAdjacent() {
   return h || v;
 }
 
+function checkWin() {
+  let order = [];
+  let message = "";
+  let tiles = document.querySelectorAll("#puzzle img");
+  tiles.forEach((tile) => {
+    let src = tile.src;
+    let parts = src.split("/");
+    let img = parts[parts.length - 1]; // last part of the til which contain img Num
+    let tileNum = img.split(".")[0];
+    order.push(tileNum);
+  });
+
+  console.log("Current order:", order.join());
+  console.log("Correct order:", correctOrder.join());
+
+  if (order.join() == correctOrder.join()) {
+    message = document.createElement("h2");
+    message.innerText = "YOU WIN 🎉!";
+    document.getElementById("message").append(message);
+  }
+}
+
 //swap once dropped
 function dragEnd() {
   if (!blankTile.src.includes("1.jpg")) {
@@ -92,6 +114,7 @@ function dragEnd() {
     //swap tiles
     blankTile.src = holding;
     currentTile.src = dropOn;
+    checkWin();
   }
 
   //moves
