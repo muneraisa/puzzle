@@ -5,6 +5,8 @@
 
 ## **Unit 1 project - Sliding Puzzle Game**
 
+#### demo link: https://muneraisa.github.io/puzzle/
+
 ## 💡 How to Play
 
 ### 🎮 Game Instructions
