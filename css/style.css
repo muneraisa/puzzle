@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
   background-color: #e8e8e8;
   text-align: center;
   font-family: "Racing Sans One", sans-serif;
-  
+  color: steelblue;
 }
 
  button{
@@ -47,6 +48,13 @@ body {
 #info {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
+}
+
+#rule
+{
+  color: black;
+   font-family: "Roboto", sans-serif;
 }
 
 
